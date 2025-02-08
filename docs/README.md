@@ -1,3 +1,3 @@
-# Headline
+# ホーム
 
-> An awesome project.
+## サブタイトル
