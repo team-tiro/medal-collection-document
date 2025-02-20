@@ -44,7 +44,7 @@ erDiagram
   tag {
     int tag_id PK "タグID"
     int user_id FK "ユーザーID"
-    varchar tag_name UK "タグ名"
+    varchar tag_name "タグ名"
     timestamp created_at "作成日時"
     timestamp updated_at "更新日時"
   }
