@@ -5,9 +5,14 @@
 title: "メモコレデータベース"
 ---
 erDiagram
-    users ||--o{ user_medals: "1人のユーザーは0以上のメダルを持つ"
+    user ||--o{ medal: ""
+    user ||--o{ tag: ""
+    user ||--o{ purchase_location: ""
+    medal ||--o{ medal_tag: ""
+    medal_tag }o--|| tag: ""
+    medal }|--|| purchase_location: ""
 
-  users {
+  user {
     int user_id PK "ユーザーID"
     varchar user_name "ユーザー名"
     varchar user_image_path "ユーザー画像"
@@ -17,15 +22,37 @@ erDiagram
     timestamp updated_at "更新日時"
   }
 
-  user_medals {
+  medal {
     int medal_id PK "メダルID"
     int user_id FK "ユーザーID"
-    varchar medal_name UK "メダル名"
+    varchar medal_name "メダル名"
     varchar medal_image_path "メダル画像"
-    enum medal_type "メダル種類"
-    enum purchase_location "購入場所"
+    int purchase_location_id FK "購入場所ID"
     timestamp purchase_date "購入日時"
     text memo "メモ"
+    timestamp created_at "作成日時"
+    timestamp updated_at "更新日時"
+  }
+
+  medal_tag {
+    int medal_id PK,FK "メダルID"
+    int tag_id PK,FK "タグID"
+    timestamp created_at "作成日時"
+    timestamp updated_at "更新日時"
+  }
+
+  tag {
+    int tag_id PK "タグID"
+    int user_id FK "ユーザーID"
+    varchar tag_name UK "タグ名"
+    timestamp created_at "作成日時"
+    timestamp updated_at "更新日時"
+  }
+
+  purchase_location {
+    int purchase_location_id PK "購入場所ID"
+    int user_id FK "ユーザーID"
+    varchar purchase_location_name "購入場所名"
     timestamp created_at "作成日時"
     timestamp updated_at "更新日時"
   }
