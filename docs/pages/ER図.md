@@ -7,10 +7,10 @@ title: "メモコレデータベース"
 erDiagram
     user ||--o{ medal: ""
     user ||--o{ tag: ""
-    user ||--o{ purchase_location: ""
-    medal ||--o{ medal_tag: ""
-    medal_tag }o--|| tag: ""
     medal }|--|| purchase_location: ""
+    medal ||--o{ medal_tag: ""
+    user ||--o{ purchase_location: ""
+    medal_tag }o--|| tag: ""
 
   user {
     int user_id PK "ユーザーID"
