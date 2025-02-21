@@ -2,7 +2,7 @@
 
 ```mermaid
 ---
-title: "メモコレデータベース"
+title: "メダコレデータベース"
 ---
 erDiagram
     user ||--o{ medal: ""
