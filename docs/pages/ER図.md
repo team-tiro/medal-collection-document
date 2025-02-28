@@ -5,11 +5,13 @@
 title: "メダコレデータベース"
 ---
 erDiagram
-    user ||--o{ medal: ""
-    user ||--o{ tag: ""
+    user ||--o{ user_album: ""
+    user_album }o--|| album: ""
+    album ||--o{ medal: ""
+    album ||--o{ tag: ""
     medal }|--|| purchase_location: ""
     medal ||--o{ medal_tag: ""
-    user ||--o{ purchase_location: ""
+    album ||--o{ purchase_location: ""
     medal_tag }o--|| tag: ""
 
   user {
@@ -22,9 +24,24 @@ erDiagram
     timestamp updated_at "更新日時"
   }
 
+  user_album {
+    int user_id PK "ユーザーID"
+    int album_id PK "アルバムID"
+    timestamp created_at "作成日時"
+    timestamp updated_at "更新日時"
+  }
+
+  album {
+    int album_id PK "アルバムID"
+    char album_share_key UK "アルバム共有キー"
+    varchar album_name "アルバム名"
+    timestamp created_at "作成日時"
+    timestamp updated_at "更新日時"
+  }
+
   medal {
     int medal_id PK "メダルID"
-    int user_id FK "ユーザーID"
+    int album_id FK "アルバムID"
     varchar medal_name "メダル名"
     varchar medal_image_path "メダル画像"
     int purchase_location_id FK "購入場所ID"
@@ -43,7 +60,7 @@ erDiagram
 
   tag {
     int tag_id PK "タグID"
-    int user_id FK "ユーザーID"
+    int album_id FK "アルバムID"
     varchar tag_name "タグ名"
     timestamp created_at "作成日時"
     timestamp updated_at "更新日時"
@@ -51,7 +68,7 @@ erDiagram
 
   purchase_location {
     int purchase_location_id PK "購入場所ID"
-    int user_id FK "ユーザーID"
+    int album_id FK "アルバムID"
     varchar purchase_location_name "購入場所名"
     timestamp created_at "作成日時"
     timestamp updated_at "更新日時"
